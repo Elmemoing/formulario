@@ -10,25 +10,15 @@
   <link rel="stylesheet" href="./css/index.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Esta linea de abajo sirve para el icono de la página que queramos -->
-  <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/74156373?s=96&v=4" sizes="16x16">
+  <link rel="icon" type="image/png" href="" sizes="16x16">
 
 </head>
 
 <body>
-<header>
-        <div class="menu">
-          <nav>
-              <ul> 
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <img class="logotipo" src="https://avatars.githubusercontent.com/u/74156373?s=96&v=4">
-                <li><a href=index.php>Inicio</a></li>
-                <li><a href=listar_persona.php>Datos Guardados</a></li>
-                <li><a href="reporte_persona">Crear PDF</a></li>
-              </ul>
-          </nav>
-        </div>
-    </header>
+
+  <?php
+    include('menu.php')
+    ?>
   <?php
   include 'db.php';
   $conexiondb = conectardb();
@@ -52,14 +42,13 @@
         ?>
       </div>
 
-      <div class="col-sm-6">
+      <div class="row-sm-6">
         <h1 class="text-center  mt-4">Listado de Personas</h1>
 
         <table class="table table-striped">
           <thead class="table-dark">
             <tr>
               <th scope="col">N</th>
-              <th scope="col">Cédula</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
               <th scope="col">Opciones</th>
@@ -71,12 +60,11 @@
             while ($persona = mysqli_fetch_assoc($resultado)) {
               echo "<tr>";
               echo "<th scope='row'>" . $index++ . "</th>";
-              echo "<td>" . $persona['cedula'] . "</td>";
               echo "<td>" . $persona['nombre'] . "</td>";
               echo "<td>" . $persona['apellido'] . "</td>";
               echo "<td>";
-              echo "<a href='editar_persona.php?cedula=" . $persona['cedula'] . "' class='btn btn-outline-primary mx-1 my-1'> <i class=for='btnradio1'>Editar</i> </a>";
-              echo "<a href='eliminar_persona.php?cedula=" . $persona['cedula'] . "' class='btn btn-outline-primary mx-1 my-1'> <i class=for='btnradio1'>Borrar</i> </a>";
+              echo "<a href='editar_persona.php?id_persona=" . $persona['id_persona'] . "' class='btn btn-outline-primary mx-1 my-1'> <i class=for='btnradio1'>Editar</i> </a>";
+              echo "<a href='eliminar_persona.php?id_persona=" . $persona['id_persona'] . "' class='btn btn-outline-primary mx-1 my-1'> <i class=for='btnradio1'>Borrar</i> </a>";
               echo "</td>";
               echo "</tr>";
             }

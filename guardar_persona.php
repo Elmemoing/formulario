@@ -2,7 +2,6 @@
 
 include 'db.php';
 
-$cedula = $_POST['cedula'];
 $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $editar = $_POST['editar'];
@@ -10,25 +9,30 @@ $editar = $_POST['editar'];
 $conexiondb = conectardb();
 
 if ($editar == "si") {
-    $query = "UPDATE persona SET nombre='" . $nombre . "', apellido='" . $apellido . "' WHERE cedula='" . $cedula . "'";
+    $id_persona = $_POST['id_persona'];
+    $query = "UPDATE persona SET nombre='" . $nombre . "', apellido='" . $apellido . "' WHERE id_persona='" . $id_persona . "'";
 } else {
-    $query = "INSERT INTO persona (cedula, nombre, apellido) VALUES 
-        ('$cedula', '$nombre', '$apellido')";
+    $query = "INSERT INTO persona (nombre, apellido) VALUES 
+        ('$nombre', '$apellido')";
 }
 
 $respuesta = mysqli_query($conexiondb, $query);
 
 if ($respuesta) {
     if ($editar == "si") {
-        echo ("Se Actualizo la persona");
+      echo ("<script>alert('Se registro la persona');
+      window.location.href='listar_persona.php'</script>");
     } else {
-        echo ("Se Registro la persona");
+      echo ("<script>alert('Se registro la persona');
+      window.location.href='index.php'</script>");
     }
 } else {
     if ($editar == "si") {
-        echo ("No se pudo actualizar la persona");
+        echo ("<script>alert('Se registro la persona');
+        window.location.href='index.php'</script>");
     } else {
-        echo ("No se pudo registrar la persona");
+        echo ("<script>alert('No se registro la persona');
+        window.location.href='index.php'</script>");
     }
 }
 

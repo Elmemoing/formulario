@@ -13,15 +13,15 @@ class PDF extends FPDF
 function Header()
 {
     // Logo
-    $this->Image("images/logo.png", 120, 5, 13);
+    $this->Image("images/logo.png", 20, 5, 8);
     // Arial bold 15
     $this->SetFont("Arial", "B", 12);
     // Título
     $this->Cell(25);
-    $this->Cell(280, 10, utf8_decode("Reporte de todos los clientes:"), 0, 0, "C");
+    $this->Cell(150, 10, utf8_decode("Reporte de personas:"), 0, 0, "C");
     //Fecha 
     $this->SetFont("Arial", "", 10);
-    $this->Cell(25, 10, "Fecha: ". date("d/m/Y"), 0, 1, "C");
+    $this->Cell(0, 10, "Fecha: ". date("d/m/Y"), 0, 1, "C");
 }
 
 // Pie de página
@@ -36,14 +36,13 @@ function Footer()
 }
 }
 
-$pdf = new PDF("L", "mm", "legal");
+$pdf = new PDF("P", "mm", "legal");
 $pdf->AliasNbPages();
 $pdf->SetMargins(5, 5, 5);
 $pdf->AddPage();
 
 $pdf->SetFont("Arial", "B", 9);
 
-$pdf->Cell(15, 5, "Cedula", 1, 0, "C");
 $pdf->Cell(25, 5, "Nombre", 1, 0, "C");
 $pdf->Cell(25, 5, "Apellido", 1, 0, "C");
 
@@ -51,7 +50,6 @@ $pdf->SetFont("Arial", "", 9);
 
 while($fila = $resultado->fetch_assoc()){
     $pdf->Ln(10);
-    $pdf->Cell(15, 5, $fila['cedula'], 1, 0, "C");
     $pdf->Cell(25, 5, utf8_decode($fila['nombre']), 1, 0, "C");
     $pdf->Cell(25, 5, utf8_decode($fila['apellido']), 1, 0, "C");
 }
